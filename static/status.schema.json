@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Status",
+  "type": "object",
+  "definitions": {
+    "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+    },
+    "branch": {
+      "type": "string",
+      "pattern": "^(main|dev)$|^(feat|chore|fix)\\/([\\/\\w\\-\\d]+)$"
+    },
+    "commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    }
+  },
+  "properties": {
+    "version": {
+      "release": { "$ref": "#/definitions/version" },
+      "branch": { "$ref": "#/definitions/branch" },
+      "commit": { "$ref": "#/definitions/commit" },
+      "required": ["release", "branch", "commit"]
+    },
+    "runtime": {
+      "type": "object",
+      "properties": {
+        "engine": {
+          "type": "string",
+          "enum": ["bun", "node"]
+        },
+        "version": { "$ref": "#/definitions/version" }
+      },
+      "required": ["engine", "version"]
+    }
+  },
+  "required": ["version", "supports", "runtime"]
+}

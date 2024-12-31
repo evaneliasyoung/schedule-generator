@@ -1,0 +1,151 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Schedule",
+  "type": "object",
+  "definitions": {
+    "color": {
+      "type": "string",
+      "pattern": "^#[0-9a-f]{6}$"
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T00:00:00Z$"
+    },
+    "time": {
+      "type": "string",
+      "pattern": "^\\d{2}:\\d{2}$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+    }
+  },
+  "properties": {
+    "version": {
+      "$ref": "#/definitions/version"
+    },
+    "schedule": {
+      "type": "object",
+      "properties": {
+        "studentName": {
+          "type": "string",
+          "default": "Evan",
+          "minLength": 0,
+          "maxLength": 12
+        },
+        "leadingText": {
+          "type": "string",
+          "default": "My Class Schedule",
+          "minLength": 0,
+          "maxLength": 24
+        },
+        "startDate": {
+          "$ref": "#/definitions/date"
+        },
+        "endDate": {
+          "$ref": "#/definitions/date"
+        },
+        "startHour": {
+          "type": "number",
+          "minimum": 8,
+          "maximum": 10
+        },
+        "endHour": {
+          "type": "number",
+          "minimum": 16,
+          "maximum": 20
+        },
+        "hourTicks": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["name", "type", "time", "location", "topic", "professor"]
+          }
+        }
+      },
+      "required": ["studentName", "leadingText", "startDate", "endDate", "startHour", "endHour", "hourTicks", "fields"]
+    },
+    "theme": {
+      "type": "object",
+      "properties": {
+        "roundedCorners": {
+          "type": "string",
+          "enum": ["none", "table", "all"],
+          "default": "none"
+        },
+        "typeColors": {
+          "type": "object",
+          "properties": {
+            "lecture": {
+              "$ref": "#/definitions/color",
+              "default": "#c6e0b4"
+            },
+            "lab": {
+              "$ref": "#/definitions/color",
+              "default": "#b4c6e7"
+            },
+            "recitation": {
+              "$ref": "#/definitions/color",
+              "default": "#f8cbad"
+            }
+          },
+          "required": ["lecture", "lab", "recitation"]
+        },
+        "twentyFourHour": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "required": ["roundedCorners", "twentyFourHour"]
+    },
+    "courses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "section": {
+            "type": "string"
+          },
+          "topic": {
+            "type": "string"
+          },
+          "professor": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "isTA": {
+            "type": "boolean"
+          },
+          "start": {
+            "$ref": "#/definitions/time"
+          },
+          "end": {
+            "$ref": "#/definitions/time"
+          },
+          "days": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "enum": [0, 1, 2, 3, 4]
+            }
+          }
+        },
+        "required": ["name", "section", "topic", "professor", "type", "location", "isTA", "start", "end", "days"]
+      }
+    }
+  },
+  "required": ["schedule", "theme", "courses"]
+}
