@@ -108,20 +108,20 @@
 </InputGroup>
 
 <InputGroup title="Times" subtitle="how long is the day? 🥱">
-  <RangeSlider name="startHour" bind:value={$startHour} min={8} max={10} step={1} ticked>
+  <RangeSlider name="startHour" bind:value={$startHour} min={6} max={10} step={1} ticked>
     <div class="slider-group">
       <div class="input-label text-primary-900-50-token">Start Time</div>
       <div class="text-xs">
-        {new Time(8).toString($twentyFourHour, true)} &ndash; {new Time(10).toString($twentyFourHour, true)}
+        {new Time(6).toString($twentyFourHour, true)} &ndash; {new Time(10).toString($twentyFourHour, true)}
       </div>
     </div>
   </RangeSlider>
 
-  <RangeSlider name="endHour" bind:value={$endHour} min={16} max={20} step={1} ticked>
+  <RangeSlider name="endHour" bind:value={$endHour} min={16} max={22} step={1} ticked>
     <div class="slider-group">
       <div class="input-label text-primary-900-50-token">End Time</div>
       <div class="text-xs">
-        {new Time(16).toString($twentyFourHour, true)} &ndash; {new Time(20).toString($twentyFourHour, true)}
+        {new Time(16).toString($twentyFourHour, true)} &ndash; {new Time(22).toString($twentyFourHour, true)}
       </div>
     </div>
   </RangeSlider>
