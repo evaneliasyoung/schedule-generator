@@ -17,10 +17,10 @@ export const endDate = resetableLocalStorageStore("endDate", new Date("2019-12-0
 })
 
 export const startHour = resetableLocalStorageStore("startHour", 8, {
-  serializer: clampedSerializer(8, 10),
+  serializer: clampedSerializer(6, 10),
 })
 export const endHour = resetableLocalStorageStore("endHour", 18, {
-  serializer: clampedSerializer(16, 20),
+  serializer: clampedSerializer(16, 22),
 })
 
 export const hourTicks = resetableLocalStorageStore("hourTicks", 4, {
